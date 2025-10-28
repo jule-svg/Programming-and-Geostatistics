@@ -1,0 +1,51 @@
+# 🧩 Fun Packages
+
+```{r}
+# library(fun)
+# optionally: if (.Platform$OS.type == "windows")
+# x11()
+# mine_sweeper()
+# gomoku()
+# 
+# library(sudoku)
+# playSudoku()
+# devtools::install_github("sctyner/memer")
+# 
+# library(memer)
+# meme_get("DistractedBf") %>%
+# meme_text_distbf("Earth Observation", "EAGLE student", "life")
+```
+
+## 🧠 feeling stupid? try this package
+
+```{r}
+devtools::install_github("gaorcsardi/praise")
+
+library(praise)
+
+praise()
+```
+
+## 🎵 create music
+
+```{r}
+library(gm)
+
+m <-
+# initialize a Music object
+Music() +
+# add a 4/4 time signature
+Meter(4, 4) +
+# add a musical line of four quarter notes
+Line(list("C5", "D5", "E5", "F5"), list(1, 1, 1, 1))
+show(m, to = c("score", "audio"))
+```
+
+# Example Vector Creation
+
+```{r}
+# # the c() command combines values
+# temp_min <- c(-2, -2, 0, 3, 7, 10, 12, 12, 8, 5, 1, -1)
+# # plot temp data
+# plot(temp_min, pch = 20, cex = 2, col = "#60c059b2") # last to digits -> translucency
+```

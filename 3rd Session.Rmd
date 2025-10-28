@@ -1,0 +1,42 @@
+# fun packages
+
+## animals
+
+```{r}
+library(fortunes)
+# call a quote
+  fortune()
+# call and search for a quote topic
+    fortune("hello")
+```
+
+```{r}
+library(cowsay)
+say("Hello World!")
+# change it a bit:
+someone_say_hello <- function() {
+  animal <- sample(animals, 1)
+  say(paste("Hello, I'm a ", animal,".", collapse = ""), by = animal)
+}
+someone_say_hello()
+```
+
+```{r}
+someone_say_my_fortune <- function() {
+  animal <- sample(animals, 1)
+  say(paste(fortune(), collapse = "\n"), by = animal)
+}
+someone_say_my_fortune()
+```
+
+```{r}
+library(suncalc)
+library(V8)
+getSunlightTimes(date = Sys.Date(), lat = 49.782332, lon = 9.97187, tz = "CET")
+```
+
+## how many days until christmas
+
+```{r}
+difftime("2025-12-24", Sys.Date(), units="days")
+```
