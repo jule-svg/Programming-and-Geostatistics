@@ -1,0 +1,70 @@
+## Install & Load Packages
+
+```{r}
+# Load or activate them
+library(terra)
+library(sf)
+library(geodata)
+library(rnaturalearth)
+```
+
+## Get and Plot Vector and Raster Data
+
+### Get country borders (Germany)
+
+```{r}
+ger <- ne_countries(country = "Kyrgyzstan", scale = "medium", returnclass = "sf")
+plot(ger) # Plot German boundaries
+```
+
+### Get global temperature minimum data (WorldClim)
+
+```{r}
+clim <- geodata::worldclim_global(
+  var = "tmin",
+  res = 10,
+  download = TRUE,
+  path = "."
+)
+plot(clim) # Plot data
+```
+
+### Check if projections match, and reproject if needed
+
+```{r}
+ger.r <- st_transform(ger, st_crs(clim))
+```
+
+## Clip and Mask Data to Germany
+
+### Crop precipitation (or temperature) data to extent of Germany
+
+```{r}
+clim.ger.crop <- terra::crop(clim, ger.r) # -> '::' because function exists in various packages
+plot(clim.ger.crop) # Plot cropped result
+```
+
+### Mask data to exact shape of Germany
+
+```{r}
+clim.ger.mask <- terra::mask(clim.ger.crop, ger.r)
+col_ramp <- colorRampPalette(c("#10abdaff", "#ff136aff"))(100)
+plot(clim.ger.mask, col = col_ramp) # Plot masked result
+```
+
+# Extract Statistics for Country
+
+## Extract the mean value (e.g., average temperature) for Germany
+
+## Other statistics (e.g., "min", "max", "median") are also possible
+
+```{r}
+climGer.vect <- terra::extract(clim.ger.mask, ger, fun = mean)
+```
+
+## View extracted data
+
+```{r}
+climGer.vect # Plot the monthly mean values (columns 2–13) 
+plot(unlist(climGer.vect[, 2:13]))
+```
